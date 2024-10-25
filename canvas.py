@@ -18,6 +18,9 @@ class Canvas(Window):
         self.cars_batch = Batch()
         self.track_image_sprite = Sprite(image.load(track_image_path), batch=self.background_batch)
         self.car_images = [image.load(c) for c in car_image_paths]
+        self.keyboard = key.KeyStateHandler()  # TODO: remove keyboard control
+        self.push_handlers(self.keyboard)  # TODO: remove keyboard control
+
 
     def simulate_generation(self):
         self.car_sprites = []
@@ -33,7 +36,8 @@ class Canvas(Window):
 
 
     def update(self, delta_time):
-        pass
+        for car_sprite in self.car_sprites:
+            car_sprite.update(delta_time, self.keyboard)   # TODO: remove keyboard control
 
     def draw(self):
         self.clear()
