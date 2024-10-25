@@ -8,7 +8,7 @@ canvas = Canvas(Track(0), car_image_paths)
 
 # Network and genetic algorithm configuration
 network_dimensions = 5, 4, 2  # input neurons, hidden layer neurons, output neurons
-population_count = 3
+population_count = 40
 networks = [Network(network_dimensions) for _ in range(population_count)]
 
 simulation_round = 1
