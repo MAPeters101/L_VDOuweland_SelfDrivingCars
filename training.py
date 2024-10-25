@@ -8,6 +8,8 @@ canvas = Canvas(Track(), car_image_paths)
 
 population_count = 3
 networks = [FirstNetwork() for _ in range(population_count)]
-canvas.simulate_generation(networks)
+
+simulation_round = 1
+canvas.simulate_generation(networks, simulation_round)
 
 
