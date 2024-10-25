@@ -4,6 +4,8 @@ from pyglet.window import key  # TODO: remove keyboard control
 
 
 class Car:
+    max_speed = 6.0
+
     def __init__(self, image, batch):
         image.anchor_x = 25
         image.anchor_y = 25
@@ -13,6 +15,7 @@ class Car:
         self.rotation = 0.0
 
     def update(self, delta_time, keyboard):   # TODO: remove keyboard control
+        render_speed = delta_time * 60
         self.speed -= 0.05  # friction
         acceleration = 0.0
         steer_position = 0.0
@@ -26,12 +29,15 @@ class Car:
         if acceleration > 0:
             self.speed += 0.1
 
+        if self.speed > self.max_speed:
+            self.speed = self.max_speed
+
         if self.speed < 0:
             self.speed = 0.0
 
-        self.rotation -= steer_position * self.speed
+        self.rotation -= steer_position * self.speed * render_speed
         self.body.rotation = -self.rotation
-        self.body.x += self.speed * math.cos(math.radians(self.rotation))
-        self.body.y += self.speed * math.sin(math.radians(self.rotation))
+        self.body.x += self.speed * render_speed * math.cos(math.radians(self.rotation))
+        self.body.y += self.speed * render_speed * math.sin(math.radians(self.rotation))
 
 
