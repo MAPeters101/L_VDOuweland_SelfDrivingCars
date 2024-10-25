@@ -1,13 +1,18 @@
+from pyglet import image
+from pyglet.graphics import Batch
+from pyglet.sprite import Sprite
 from pyglet.window import Window, key
 import time
 
 class Canvas(Window):
     frame_duration = 1 / 60
-    def __init__(self):
+    def __init__(self, track_image_path):
         super().__init__()
         self.is_simulating = True
         self.width = 960
         self.height = 540
+        self.background_batch = Batch()
+        self.track_image_sprite = Sprite(image.load(track_image_path), batch=self.background_batch)
 
     def simulate_generation(self):
         last_time = time.perf_counter()
@@ -25,6 +30,7 @@ class Canvas(Window):
 
     def draw(self):
         self.clear()
+        self.background_batch.draw()
         self.flip()
 
 
