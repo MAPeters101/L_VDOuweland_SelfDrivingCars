@@ -35,7 +35,19 @@ class Network:
                     chromosome.append(weight)
         return RankableChromosome(self.highest_checkpoint, chromosome)
 
-
+    def deserialize(self, chromosome):
+        layer_index = 0
+        output_index = 0
+        input_index = 0
+        for gene in chromosome:
+            self.layers[layer_index].weights[output_index][input_index] = gene
+            input_index += 1
+            if input_index > len(self.layers[layer_index].weights[output_index]) - 1:
+                input_index = 0
+                output_index += 1
+                if output_index > len(self.layers[layer_index].weights) - 1:
+                    output_index = 0
+                    layer_index += 1
 
 
 class RankableChromosome:

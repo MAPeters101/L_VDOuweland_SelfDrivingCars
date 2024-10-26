@@ -1,3 +1,7 @@
+import itertools
+import random
+
+
 class Evolution:
     def __init__(self, population_count, keep_count):
         self.population_count = population_count
@@ -9,7 +13,14 @@ class Evolution:
         keep_chromosome = sorted_chromosomes[:self.keep_count]
 
         # cross over
-        offspring = []
+        reproduction_times = (self.population_count - self.keep_count) / self.keep_count
+        offspring = [c for c in keep_chromosome]  # copy best chromosomes to offspring
+        for _ in range(int(reproduction_times)):
+            for c1, c2 in itertools.batched(keep_chromosome, 2):
+                split_index = random.randint(0, len(c1) - 1)
+                offspring.append(c1[:split_index] + c2[split_index:])
+                offspring.append(c2[:split_index] + c1[split_index:])
+
 
         # mutation
 
