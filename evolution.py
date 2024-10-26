@@ -23,6 +23,10 @@ class Evolution:
 
 
         # mutation
+        for chromosome in offspring[self.keep_count:]:
+            for i in range(len(chromosome)):
+                if random.randint(0, 4) == 1:
+                    chromosome[i] = random.random() * 2 - 1
 
         assert len(offspring) == self.population_count, "Offspring count is not population_count"
         return offspring
