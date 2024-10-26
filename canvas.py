@@ -50,6 +50,10 @@ class Canvas(Window):
 
         for car in self.car_sprites:
             car.network.highest_checkpoint = car.last_checkpoint_passed
+            if car.last_checkpoint_passed == len(self.checkpoint_sprites) - 1:
+                car.network.has_reached_goal = True
+
+
 
 
     def update(self, delta_time):

@@ -16,6 +16,7 @@ class Layer:
 class Network:
     def __init__(self, dimensions):  # dimensions example:  5, 4, 2
         self.dimensions = dimensions
+        self.has_reached_goal = False
         self.highest_checkpoint = 0
         self.layers = []
         for i in range(len(dimensions) - 1):
