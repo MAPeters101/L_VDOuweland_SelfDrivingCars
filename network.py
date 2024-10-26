@@ -16,6 +16,7 @@ class Layer:
 class Network:
     def __init__(self, dimensions):  # dimensions example:  5, 4, 2
         self.dimensions = dimensions
+        self.highest_checkpoint = 0
         self.layers = []
         for i in range(len(dimensions) - 1):
             self.layers.append(Layer(dimensions[i], dimensions[i + 1]))
@@ -25,3 +26,28 @@ class Network:
             layer.feed_forward(inputs)
             inputs = [i for i in layer.outputs]
         return self.layers[-1].outputs
+
+    def serialize(self):
+        chromosome = []
+        for layer in self.layers:
+            for outputs in layer.weights:
+                for weight in outputs:
+                    chromosome.append(weight)
+        return RankableChromosome(self.highest_checkpoint, chromosome)
+
+
+
+
+class RankableChromosome:
+    def __init__(self, highest_checkpoint, chromosome):
+        self.highest_checkpoint = highest_checkpoint
+        self.chromosome = chromosome
+
+    def __lt__(self, other):
+        """ Allows sorting chromosomes for rank selection with the following rules:
+            - highest checkpoint appears on top of the list. """
+        return self.highest_checkpoint > other.highest_checkpoint
+
+
+
+
