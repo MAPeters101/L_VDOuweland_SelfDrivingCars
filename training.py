@@ -5,7 +5,7 @@ from network import Network
 from evolution import Evolution
 
 car_image_paths = [os.path.join("images", f"car{i}.png") for i in range(5)]
-canvas = Canvas(Track(1), car_image_paths)
+canvas = Canvas(Track(2), car_image_paths)
 
 # Network and genetic algorithm configuration
 network_dimensions = 5, 4, 2  # input neurons, hidden layer neurons, output neurons

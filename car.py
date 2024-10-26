@@ -11,6 +11,7 @@ class Radar:
 
 class Car:
     max_speed = 6.0
+    slipping_speed = max_speed * 0.75
 
     def __init__(self, network, track, image, batch):
         self.network = network
@@ -37,7 +38,13 @@ class Car:
 
             if self.speed > self.max_speed:
                 self.speed = self.max_speed
-            self.rotation -= steer_position * self.speed * render_speed * 3
+
+            if self.speed > self.slipping_speed:
+                steer_impact = -self.speed / self.max_speed + self.slipping_speed / self.max_speed + 1
+            else:
+                steer_impact = 1
+
+            self.rotation -= steer_position * self.speed * steer_impact * render_speed * 3
         else:  # engine is off
             self.speed -= 0.05 * self.speed
 
