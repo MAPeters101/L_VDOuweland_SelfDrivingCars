@@ -22,6 +22,7 @@ class Network:
             self.layers.append(Layer(dimensions[i], dimensions[i + 1]))
 
     def feed_forward(self, inputs):
+        self.inputs = [i for i in inputs]  # store input values for visualization in Hud
         for layer in self.layers:
             layer.feed_forward(inputs)
             inputs = [i for i in layer.outputs]

@@ -33,7 +33,7 @@ class Canvas(Window):
             anchor_y="center", color=(255, 255, 255, 255), batch=self.background_batch)))
 
     def simulate_generation(self, networks, simulation_round):
-        self.hud = Hud(simulation_round, self.overlay_batch)
+        self.hud = Hud(simulation_round, networks[0].dimensions, self.overlay_batch)
         self.car_sprites = []
         for network in networks:
             self.car_sprites.append(Car(network, self.track, random.choice(self.car_images), self.cars_batch))
