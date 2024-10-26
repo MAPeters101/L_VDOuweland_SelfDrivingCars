@@ -63,7 +63,7 @@ class Canvas(Window):
         running_cars = [c for c in self.car_sprites if c.is_running]
         self.population_alive = len(running_cars)
         if self.population_alive > 0:
-            self.hud.update(self.population_alive, self.population_total, running_cars[0].speed)
+            self.hud.update(running_cars[0].network, self.population_alive, self.population_total, running_cars[0].speed)
 
     def draw(self):
         self.clear()

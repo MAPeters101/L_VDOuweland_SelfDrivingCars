@@ -37,7 +37,7 @@ class Car:
 
             if self.speed > self.max_speed:
                 self.speed = self.max_speed
-            self.rotation -= steer_position * self.speed * render_speed
+            self.rotation -= steer_position * self.speed * render_speed * 3
         else:  # engine is off
             self.speed -= 0.05 * self.speed
 
