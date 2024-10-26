@@ -6,7 +6,7 @@ from evolution import Evolution
 from storage import Storage
 
 car_image_paths = [os.path.join("images", f"car{i}.png") for i in range(5)]
-canvas = Canvas(Track(2), car_image_paths)
+canvas = Canvas(Track(3), car_image_paths)
 
 # Network and genetic algorithm configuration
 network_dimensions = 5, 4, 2  # input neurons, hidden layer neurons, output neurons
@@ -17,6 +17,11 @@ keep_count = 4
 networks = [Network(network_dimensions) for _ in range(population_count)]
 evolution = Evolution(population_count, keep_count)
 storage = Storage("brain.js")
+
+best_chromosomes = storage.load()
+for c, n in zip(best_chromosomes, networks):
+    n.deserialize(c)
+
 
 simulation_round = 1
 while simulation_round <= max_generation_iterations and canvas.is_simulating:
