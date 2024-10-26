@@ -9,9 +9,14 @@ canvas = Canvas(Track(1), car_image_paths)
 # Network and genetic algorithm configuration
 network_dimensions = 5, 4, 2  # input neurons, hidden layer neurons, output neurons
 population_count = 40
+max_generation_iterations = 5
 networks = [Network(network_dimensions) for _ in range(population_count)]
 
 simulation_round = 1
-canvas.simulate_generation(networks, simulation_round)
-
+while simulation_round <= max_generation_iterations and canvas.is_simulating:
+    print(f"=== Round: {simulation_round} ===")
+    canvas.simulate_generation(networks, simulation_round)
+    simulation_round += 1
+    if canvas.is_simulating:
+        print(f"-- Average checkpoint reached: {sum(n.highest_checkpoint for n in networks) / len(networks):.2f}")
 
