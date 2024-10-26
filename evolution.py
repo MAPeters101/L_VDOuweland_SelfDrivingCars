@@ -5,6 +5,8 @@ class Evolution:
 
     def execute(self, rankable_chromosome):
         # selection
+        sorted_chromosomes = [w.chromosome for w in sorted(rankable_chromosome)]
+        keep_chromosome = sorted_chromosomes[:self.keep_count]
 
         # cross over
         offspring = []
